@@ -1,0 +1,85 @@
+\documentclass[12pt]{article}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, russian]{babel}
+\usepackage[sups]{XCharter}
+\usepackage[vvarbb, uprightscript, charter, scaled=1.05]{newtxmath}
+\usepackage{enumitem}
+\usepackage{verbatim}
+% \usepackage{caption}
+% \captionsetup[figure]{skip=1pt}
+\usepackage{microtype}
+% \usepackage[style=numeric, sorting=none]{biblatex}
+% \addbibresource{refs.bib}
+% \usepackage{minted}
+% \usepackage{fancyhdr}
+% \usepackage{gensymb}
+% \usepackage{booktabs}
+% \usepackage{ntheorem}
+% \usepackage{mathtools}
+\usepackage{geometry}
+% \usepackage{titling}  
+\usepackage{indentfirst}
+% \usepackage[normalem]{ulem}
+% \useunder{\uline}{\ul}{}
+\usepackage{graphicx}
+\graphicspath{ {../vis/} }
+
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+\geometry{a4paper, textwidth=16cm, textheight=24cm}
+
+\newcommand{\mpl}[2]{
+    \begin{figure}[!h]
+        \includegraphics[width=0.98\textwidth]{#1}
+        \centering
+        \caption{#2}
+        \label{fig:#1}
+     \end{figure}
+}
+
+\title{Отчет по заданию №3:\break Композиции алгоритмов для решения \break задачи регрессии}
+\author{Васильев Руслан \and{ВМК МГУ, 317 группа}}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+% \setcounter{secnumdepth}{0}
+\section{Введение}
+В заключительном практическом задании предлагается реализовать композиции алгоритмов машинного обучения и провести эксперименты, а также спроектировать веб-сервис для взаимодействия с моделью. Весь проект доступен в репозитории\footnote{\url{https://github.com/artnitolog/mmf_prac_2020_task_3}}. Данный отчет иллюстрирует результаты экспериментов с моделями на датасете данных о продажи недвижимости.
+
+\section{Постановка задачи}
+
+Итак, рассматривается задача регрессии с метрикой качества RMSE:
+\begin{equation*}
+    \operatorname{RMSE} = \sqrt{\frac{\sum_{i=1}^{N} (y_i - \hat{y}_i)}{N}},
+\end{equation*}
+где $N$~--- размер выборки, $y_i$~--- истинное значение целевой переменной на $i$-м объекте, $\hat{y}_i$~--- предсказанное.
+
+Для решения реализованы две модели, представляющие собой ансамбли решающих деревьев: случайный лес и градиентный бустинг. Исследование алгоритмов включает в себя измерение функции ошибки и времени работы при варьировании гиперпараметров (порядок экспериментов соответствует стандартной настройке данных моделей).
+
+\section{Эксперименты}
+\subsection{Предобработка данных}
+Исходные данные о недвижимости были разделены на обучение (80\%) и контроль (20\%, она же валидационная выборка). И здесь сразу учитывается особенность задачи. Хотя в задании отсутствует описание признаков и целевой переменной, можно с уверенностью предположить, что столбец \verb|date| связан со временем поступления данных (даты имеют небольшой диапазон 2014--2015, монотонно возрастают, дублируются, следуют сразу за \verb|ID|, а столбцы \verb|build_year| и \verb|renovation_year| с ними не связаны). По этой причине было бы некорректно перемешать выборку перед разделением на обучение и контроль~--- из-за утечки такая стратегия может дать ложную оценку качества моделей и привести к неправильным выводам. В качестве валидационной выборки берутся последние 20\% данных, соответствующие хронологическому порядку по столбцу \verb|date|.
+
+\subsection{Случайный лес}
+\subsubsection{Количество деревьев}
+\subsubsection{Размерность подвыборки признаков для дерева}
+\subsubsection{Глубина дерева}
+
+\subsection{Градиентный бустинг}
+\subsubsection{Количество деревьев и темп обучения}
+\subsubsection{Глубина дерева}
+\subsubsection{Размерность подвыборки признаков для дерева}
+\section{Заключение}
+\end{document}
