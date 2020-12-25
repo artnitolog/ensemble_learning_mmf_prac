@@ -1,7 +1,8 @@
 numpy
 scipy
 scikit-learn
+matplotlib
+Flask
 wtforms
 flask_wtf
 flask_bootstrap
-
