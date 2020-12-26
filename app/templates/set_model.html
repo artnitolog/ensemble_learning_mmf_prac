@@ -6,17 +6,35 @@
 
 Гиперпараметры:
 
-<form method='POST' action={{ url_for('get_models') }}>
+<form method='POST' action={{ url_for('set_model', name=name) }}>
         {{ form.csrf_token }}
         <div class='field'>
-            {{ form.name.label }}
-            {{ form.name(size=20) }}
+            {{ form.n_estimators.label }}
+            {{ form.n_estimators(size=20) }}
+        </div>
+        {%- if model_type == 'GBM' -%}
+        <div class='field'>
+            {{ form.learning_rate.label }}
+            {{ form.learning_rate(size=20) }}
+        </div>
+        {%- endif %}
+        <div class='field'>
+            {{ form.max_depth.label }}
+            {{ form.max_depth(size=20) }}
         </div>
         <div class='field'>
-            {{ form.model_type.label }}
-            {{ form.model_type() }}
+            {{ form.feature_subsample_size.label }}
+            {{ form.feature_subsample_size(size=20) }}
         </div>
-    {{ form.submit() }}
+        <div class='field'>
+            {{ form.random_state.label }}
+            {{ form.random_state(size=20) }}
+        </div>
+        <div class='field'>
+            {{ form.trees_parameters.label }}
+            {{ form.trees_parameters(size=20) }}
+        </div>
+        <input type="submit" value="Сохранить модель">
 </form>
 
 Датасет:

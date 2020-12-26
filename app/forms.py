@@ -1,6 +1,7 @@
+import json
 from flask_wtf import FlaskForm
-from wtforms import StringField, SelectField, SubmitField, DecimalField, IntegerField
-from wtforms.validators import DataRequired
+from wtforms import StringField, SelectField, DecimalField, IntegerField
+from wtforms.validators import DataRequired, Optional
 
 model_types = [
     ('RF', 'Случайный лес'),
@@ -8,15 +9,23 @@ model_types = [
 ]
 
 
+def json_field_filter(str_):
+    try:
+        dict_ = json.loads(str_)
+    except Exception:
+        dict_ = {}
+    return dict_
+
 class NewEnsembleForm(FlaskForm):
     name = StringField('Название модели', validators=[DataRequired()])
     model_type = SelectField('Тип ансамбля', choices=model_types)
-    submit = SubmitField('Продолжить')
 
 
 class HyperParamForm(FlaskForm):
-    n_estimators = IntegerField('Количество деревьев')
-    learning_rate = DecimalField('Темп обучения')
-    max_depth = IntegerField('Максимальная глубина')
-    feature_subsample_size = IntegerField('Размерность подвыборки признаков для одного дерева')
-    random_state = IntegerField('Сид')
+    n_estimators = IntegerField('Количество деревьев', default=100)
+    learning_rate = DecimalField('Темп обучения', default=0.1)
+    max_depth = IntegerField('Максимальная глубина', validators=[Optional()])
+    feature_subsample_size = IntegerField('Размерность подвыборки признаков для одного дерева',
+        validators=[Optional()])
+    random_state = IntegerField('Сид', default=0)
+    trees_parameters = StringField('Дополнительные параметры для дерева JSON!', validators=[Optional()], filters=[json_field_filter])
