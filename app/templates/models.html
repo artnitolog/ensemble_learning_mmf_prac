@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block title %}Модели{% endblock %}
+
+{% block body %}
+    <h1>Вот это — страничка с моделями!</h1>
+    <p>Мы амбассадорим <a href="https://www.google.com/">гугл</a>.</p>
+    <a href="{{ url_for('get_index') }}"><button>верните меня обратно</button></a>
+{% endblock %}

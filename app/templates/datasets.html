@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block title %}Датасеты{% endblock %}
+
+{% block body %}
+    <h1>А это — страничка с датасетами!</h1>
+    <p>Мы амбассадорим <a href="https://www.yandex.ru/">яндекс</a>.</p>
+    <a href="{{ url_for('get_index') }}"><button>верните меня обратно</button></a>
+{% endblock %}

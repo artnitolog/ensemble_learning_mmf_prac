@@ -2,6 +2,6 @@
 
 ## Docker
 
-1. `docker build -t third_server .`
-2. `docker run --rm -p 5000:5000 -v "$PWD/task:/root/TASK" -i third_server`
+1. `docker build -t server_ens .`
+2. `docker run --rm -p 5000:5000 -v "$PWD/task:/root/TASK" -i server_ens`
 -v хммм

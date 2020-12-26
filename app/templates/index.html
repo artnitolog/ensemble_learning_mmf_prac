@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block title %}Заглавная страница{% endblock %}
+
+{% block body %}
+    <h1>Добрый день!</h1>
+    <p>Как насчет <a href={{ url_for('get_datasets') }}>датасетов</a>?</p>
+    <p>Или, может, <a href={{ url_for('get_models') }}>моделей</a>?</p>
+    <p>На этом все.</p>
+{% endblock %}
