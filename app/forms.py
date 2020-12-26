@@ -8,7 +8,6 @@ model_types = [
     ('GBM', 'Градиентный бустинг'),
 ]
 
-
 def json_field_filter(str_):
     try:
         dict_ = json.loads(str_)

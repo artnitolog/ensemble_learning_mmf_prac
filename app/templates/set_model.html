@@ -4,8 +4,10 @@
 
 {% block content %}
 
-Гиперпараметры:
+<h2>{{ name }}</h2>
+<h2>{{ model_type }}</h2>
 
+Гиперпараметры:
 <form method='POST' action={{ url_for('set_model', name=name) }}>
         {{ form.csrf_token }}
         <div class='field'>

@@ -1,4 +1,3 @@
-
 from flask import Flask, render_template, request, redirect, url_for, session
 from forms import NewEnsembleForm, HyperParamForm
 from wraps import Ensemble
@@ -18,7 +17,7 @@ def get_index():
 
 @app.route('/models/', methods=['GET', 'POST'])
 def get_models():
-    form = NewEnsembleForm(csrf_enabled=False)
+    form = NewEnsembleForm(meta={'csrf': False})
     if form.validate_on_submit():
         session['model_type'] = form.model_type.data
         return redirect(url_for('set_model', name=form.name.data))
@@ -26,11 +25,12 @@ def get_models():
 
 @app.route('/models/<name>/settings/', methods=['GET', 'POST'])
 def set_model(name):
-    form = HyperParamForm(csrf_enabled=False)
+    model_type = session['model_type']
+    form = HyperParamForm(meta={'csrf': False})
     if form.validate_on_submit():
-        # hyparams = form_to_hyparams(form.data)
-        return str(form.data)
-    return render_template('set_model.html', form=form, name=name, mode_type=session['model_type'])
+        models.append(Ensemble(name, model_type, form.data))
+        return redirect(url_for('get_models'))
+    return render_template('set_model.html', form=form, name=name, model_type=model_type)
 
 @app.route('/data/')
 def get_datasets():
