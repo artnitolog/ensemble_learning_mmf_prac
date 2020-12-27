@@ -11,6 +11,3 @@ RUN chmod +x run.py
 ENV SECRET_KEY verysecretkey
 
 CMD ["python", "run.py"]
-
-# ENV FLASK_APP run.py
-#CMD ["flask"]
