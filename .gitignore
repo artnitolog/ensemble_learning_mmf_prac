@@ -1,4 +1,16 @@
 # Python
 __pycache__/
 .ipynb_checkpoints
+
+# TeX
+*.aux
+*.log
+*.fls
+*.out
+*.toc
+*.synctex.gz
+*.fdb_latexmk
+
+# Local
 *.pickle
+notrack_*
