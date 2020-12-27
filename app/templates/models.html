@@ -6,7 +6,6 @@
 
 
 <form method='POST' action={{ url_for('get_models') }}>
-        {{ form.csrf_token }}
         <div class='field'>
             {{ form.name.label }}
             {{ form.name(size=20) }}

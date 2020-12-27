@@ -9,7 +9,6 @@
 
 Гиперпараметры:
 <form method='POST' action={{ url_for('set_model', name=name) }}>
-        {{ form.csrf_token }}
         <div class='field'>
             {{ form.n_estimators.label }}
             {{ form.n_estimators(size=20) }}

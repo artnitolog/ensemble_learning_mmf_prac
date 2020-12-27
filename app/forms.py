@@ -2,6 +2,7 @@ import json
 from flask_wtf import FlaskForm
 from wtforms import StringField, SelectField, DecimalField, IntegerField
 from wtforms.validators import DataRequired, Optional
+from flask_wtf.file import FileField, FileAllowed, FileRequired
 
 model_types = [
     ('RF', 'Случайный лес'),
@@ -28,3 +29,14 @@ class HyperParamForm(FlaskForm):
         validators=[Optional()])
     random_state = IntegerField('Сид', default=0)
     trees_parameters = StringField('Дополнительные параметры для дерева JSON!', validators=[Optional()], filters=[json_field_filter])
+
+
+# class NewData(FlaskForm):
+#     path = StringField('Абсолютный к файлу', )
+
+class UploadForm(FlaskForm):
+    name = StringField('Имя датасета', validators=[DataRequired()])
+    upload_file = FileField('Датасет (csv)', validators=[
+        FileRequired(),
+        # FileAllowed(['csv'], 'CSV only!')
+    ])

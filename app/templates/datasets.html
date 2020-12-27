@@ -2,8 +2,27 @@
 
 {% block title %}Датасеты{% endblock %}
 
-{% block body %}
-    <h1>А это — страничка с датасетами!</h1>
-    <p>Мы амбассадорим <a href="https://www.yandex.ru/">яндекс</a>.</p>
-    <a href="{{ url_for('get_index') }}"><button>верните меня обратно</button></a>
+{% block content %}
+
+
+<form method='POST' enctype="multipart/form-data" action={{ url_for('get_data') }}>
+    {{ form.csrf_token }}
+    <div class='field'>
+        {{ form.name.label }}
+        {{ form.name(size=20) }}
+    </div>
+    <div class='field'>
+        {{ form.hidden_tag() }}
+        {{ form.upload_file }}
+    </div>
+    <input type="submit" value="Продолжить">
+</form>
+
+<h3>Обученные модели:</h3>
+  {% for name in datasets: %}
+    <div>* {{ name }}
+      {{ datasets[name].to_html() | safe }}
+    </div>
+  {% endfor %}
+  <a href="{{ url_for('get_index') }}"><button>верните меня обратно</button></a>
 {% endblock %}
