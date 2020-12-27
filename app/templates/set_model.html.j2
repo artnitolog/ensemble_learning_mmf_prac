@@ -1,0 +1,44 @@
+{% extends "base.html.j2" %}
+
+{% block title %}Настройка модели{% endblock %}
+
+{% block content %}
+
+<h1>Выбор гиперпараметров для модели <u>{{ name }}</u>,</h1>
+<h3>Тип ансамбля — {{ ('случайный лес' if (model_type == 'RF')
+                      else 'градиентный бустинг')}}.</h3>
+
+<i>Укажите гиперпараметры:</i>
+<form method='POST' action={{ url_for('set_model', name=name) }}>
+        <div class='field'>
+            {{ form.n_estimators.label }}
+            {{ form.n_estimators(size=20) }}
+        </div>
+        {%- if model_type == 'GBM' -%}
+        <div class='field'>
+            {{ form.learning_rate.label }}
+            {{ form.learning_rate(size=20) }}
+        </div>
+        {%- endif %}
+        <div class='field'>
+            {{ form.max_depth.label }}
+            {{ form.max_depth(size=20) }}
+        </div>
+        <div class='field'>
+            {{ form.feature_subsample_size.label }}
+            {{ form.feature_subsample_size(size=20) }}
+        </div>
+        <div class='field'>
+            {{ form.random_state.label }}
+            {{ form.random_state(size=20) }}
+        </div>
+        <div class='field'>
+            {{ form.trees_parameters.label }}
+            {{ form.trees_parameters(size=20) }}
+        </div>
+        <input type="submit" value="Сохранить модель">
+</form>
+
+<br>
+<a href="{{ url_for('get_models') }}"><button>Назад</button></a>
+{% endblock %}
