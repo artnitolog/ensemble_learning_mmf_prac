@@ -10,7 +10,8 @@
 
     <div>
     {% if model.is_fitted %}
-      {{ 'Здесь правда будет график обучения и так далее' }}
+      <img src={{ url_for('plot_png', name=model.name) }} alt='alt: гРаФиК нЕ пОдГрУжАеТсЯ'
+                   width=50%>
       <p>Поздравляем с обучением модели! Теперь можно предсказывать.</p>
       <form method='POST' action={{ url_for('model_page', name=model.name) }}>
         <div class='field'>
@@ -36,11 +37,7 @@
     {% endif %}
     </div>
 
-    <div> {{ model.__dict__ }} </div>
-
-    <div> {{ learn_form.__dict__ }} </div>
-
-    <div> {{ test_form.__dict__ }} </div>
+    <div> {{ model.model.__dict__ }} </div>
   
   <a href="{{ url_for('get_models') }}"><button>верните меня обратно</button></a>
 {% endblock %}

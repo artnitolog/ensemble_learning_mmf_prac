@@ -29,7 +29,7 @@
 <h3>Имеющиеся модели:</h3>
   {% for name, dataset in datasets.items(): %}
     <div>* {{ name, dataset.target_name }}
-      {{ dataset.data.to_html() | safe }}
+      {{ dataset.data.head().to_html() | safe }}
     </div>
   {% endfor %}
   <a href="{{ url_for('get_index') }}"><button>верните меня обратно</button></a>

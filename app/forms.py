@@ -51,7 +51,7 @@ class UploadForm(FlaskForm):
 
 class LearnForm(FlaskForm):
     train_data = SelectField('Обучающая выборка', validators=[DataRequired()])
-    val_data = SelectField('Валидационная выборка', validators=[Optional()])
+    val_data = SelectField('Валидационная выборка')
 
 
 class TestForm(FlaskForm):
