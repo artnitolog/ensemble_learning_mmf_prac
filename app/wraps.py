@@ -9,10 +9,17 @@ class Ensemble:
         'GBM': GradientBoostingMSE,
     }
 
-    def __init__(self, name, ens_type, hyparams):
+    __rus_types = {
+        'RF': 'Случайный лес',
+        'GBM': 'Градиентный бустинг'
+    }
+
+    def __init__(self, name, ens_type, form):
         self.name = name
-        self.ens_type = ens_type
-        self.hyparams = copy(hyparams)
+        self.ens_type = self.__rus_types[ens_type]
+        hyparams = form.data
+        self.description = {form[param].label.text: hyparams[param] for param in hyparams}
+        self.description['Тип ансамбля'] = self.__rus_types[ens_type]
         trees_parameters = hyparams.pop('trees_parameters')
         self.model = self.__models[ens_type](**{**hyparams, **trees_parameters})
         self.train_loss = None
@@ -29,15 +36,16 @@ class Ensemble:
     def predict(self, data_test):
         y_pred = self.model.predict(data_test.features)
         return pd.DataFrame(y_pred, index=data_test.data.index, columns=['prediction'])
-    
+
     def __plot(self, loss):
         pass
 
     def plot(self, loss_type='train'):
         if loss_type == 'train':
-            return self.plot(self.train_loss)
+            return self.__plot(self.train_loss)
         elif loss_type == 'val':
-            return self.plot(self.val_loss)
+            return self.__plot(self.val_loss)
+    
 
 class Dataset:
     def __init__(self, name, data, target_name):

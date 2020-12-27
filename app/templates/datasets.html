@@ -26,9 +26,9 @@
     <input type="submit" value="Продолжить">
 </form>
 
-<h3>Обученные модели:</h3>
-  {% for dataset in datasets: %}
-    <div>* {{ dataset.name, dataset.target_name }}
+<h3>Имеющиеся модели:</h3>
+  {% for name, dataset in datasets.items(): %}
+    <div>* {{ name, dataset.target_name }}
       {{ dataset.data.to_html() | safe }}
     </div>
   {% endfor %}

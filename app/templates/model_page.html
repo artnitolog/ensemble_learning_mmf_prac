@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Модели{% endblock %}
+{% block title %}Хмм, страница модели {{ model. }}{% endblock %}
 
 {% block content %}
 
@@ -18,8 +18,8 @@
 </form>
   
 <h3>Итаг, какие модели у нас есть:</h3>
-  {% for name in models: %}
-    <div>* {{ models[name].__dict__ }}</div>
+  {% for model in models: %}
+    <div>* {{model}}</div>
   {% endfor %}
   <a href="{{ url_for('get_index') }}"><button>верните меня обратно</button></a>
 {% endblock %}
