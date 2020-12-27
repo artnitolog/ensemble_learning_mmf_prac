@@ -36,7 +36,14 @@ class HyperParamForm(FlaskForm):
 
 class UploadForm(FlaskForm):
     name = StringField('Имя датасета', validators=[DataRequired()])
-    upload_file = FileField('Датасет (csv)', validators=[
+    features_file = FileField('Датасет (csv)', validators=[
         FileRequired(),
-        # FileAllowed(['csv'], 'CSV only!')
+        FileAllowed(['csv'], 'CSV only!')
+    ])
+    target_name = StringField('Имя целевой переменной', validators=[
+        Optional(),
+    ])
+    target_file = FileField('Целевая переменная (csv)', validators=[
+        Optional(),
+        FileAllowed(['csv'], 'CSV only!')
     ])

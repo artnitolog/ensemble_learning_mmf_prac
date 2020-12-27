@@ -15,6 +15,8 @@ class Ensemble:
         self.model = self.__models[ens_type](**{**hyparams, **trees_parameters})
 
 
-# class Dataset:
-#     def __init__(self, features, target=None, index_col=None):
-        # self.features = features
+class Dataset:
+    def __init__(self, name, data, target_name):
+        self.name = name
+        self.data = data
+        self.target_name = target_name

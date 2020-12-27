@@ -12,16 +12,24 @@
         {{ form.name(size=20) }}
     </div>
     <div class='field'>
-        {{ form.hidden_tag() }}
-        {{ form.upload_file }}
+        {{ form.features_file.label }}
+        {{ form.features_file() }}
+    </div>
+    <div class='field'>
+        {{ form.target_name.label }}
+        {{ form.target_name(size=20) }}
+    </div>
+    <div class='field'>
+        {{ form.target_file.label }}
+        {{ form.target_file() }}
     </div>
     <input type="submit" value="Продолжить">
 </form>
 
 <h3>Обученные модели:</h3>
-  {% for name in datasets: %}
-    <div>* {{ name }}
-      {{ datasets[name].to_html() | safe }}
+  {% for dataset in datasets: %}
+    <div>* {{ dataset.name, dataset.target_name }}
+      {{ dataset.data.to_html() | safe }}
     </div>
   {% endfor %}
   <a href="{{ url_for('get_index') }}"><button>верните меня обратно</button></a>
