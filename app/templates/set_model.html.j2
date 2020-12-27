@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base.html.j2" %}
 
 {% block title %}Настройка модели{% endblock %}
 
@@ -37,8 +37,6 @@
         </div>
         <input type="submit" value="Сохранить модель">
 </form>
-
-Датасет:
 
   <a href="{{ url_for('get_models') }}"><button>верните меня обратно</button></a>
 {% endblock %}

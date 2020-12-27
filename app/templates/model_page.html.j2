@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base.html.j2" %}
 
 {% block title %} {{ model.name }} {% endblock %}
 
@@ -8,7 +8,39 @@
     <p>Что тут у нас известно о модели?! А вот что:</p>
     <div>{{ model.description.to_html(index=False) | safe }}</div>
 
-    if 
+    <div>
+    {% if model.is_fitted %}
+      {{ 'Здесь правда будет график обучения и так далее' }}
+      <p>Поздравляем с обучением модели! Теперь можно предсказывать.</p>
+      <form method='POST' action={{ url_for('model_page', name=model.name) }}>
+        <div class='field'>
+            {{ test_form.test_data.label }}
+            {{ test_form.test_data() }}
+        </div>
+        <input type="submit" value="Предсказать">
+      </form>
+    {% else %}
+        <p>Пока что модель не обучена. Почему бы не сделать это?</p>
+        <form method='POST' action={{ url_for('model_page', name=model.name) }}>
+        <div class='field'>
+            {{ learn_form.train_data.label }}
+            {{ learn_form.train_data() }}
+        </div>
+        <div class='field'>
+            {{ learn_form.val_data.label }}
+            {{ learn_form.val_data() }}
+        </div>
+        <input type="submit" value="Обучить модель">
+      </form>
+
+    {% endif %}
+    </div>
+
     <div> {{ model.__dict__ }} </div>
+
+    <div> {{ learn_form.__dict__ }} </div>
+
+    <div> {{ test_form.__dict__ }} </div>
+  
   <a href="{{ url_for('get_models') }}"><button>верните меня обратно</button></a>
 {% endblock %}

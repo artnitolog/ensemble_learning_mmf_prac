@@ -33,6 +33,10 @@ class Ensemble:
         else:
             self.train_loss = self.model.fit(X_train, y_train, return_train_loss=True)
 
+    @property
+    def is_fitted(self):
+        return self.train_loss is not None
+
     def predict(self, data_test):
         y_pred = self.model.predict(data_test.features)
         return pd.DataFrame(y_pred, index=data_test.data.index, columns=['prediction'])

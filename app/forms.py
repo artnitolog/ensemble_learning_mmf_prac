@@ -47,3 +47,12 @@ class UploadForm(FlaskForm):
         Optional(),
         FileAllowed(['csv'], 'CSV only!')
     ])
+
+
+class LearnForm(FlaskForm):
+    train_data = SelectField('Обучающая выборка', validators=[DataRequired()])
+    val_data = SelectField('Валидационная выборка', validators=[Optional()])
+
+
+class TestForm(FlaskForm):
+    test_data = SelectField('Тестовая выборка', validators=[DataRequired()])
