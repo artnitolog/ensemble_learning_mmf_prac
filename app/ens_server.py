@@ -33,6 +33,8 @@ def set_model(name):
     model_type = session['model_type']
     form = HyperParamForm(meta={'csrf': False})
     if form.validate_on_submit():
+        if model_type == 'RF':
+            del form.learning_rate
         models[name] = Ensemble(name, model_type, form)
         return redirect(url_for('get_models'))
     return render_template('set_model.html', form=form, name=name, model_type=model_type)

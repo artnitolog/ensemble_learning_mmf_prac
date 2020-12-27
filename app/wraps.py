@@ -16,10 +16,10 @@ class Ensemble:
 
     def __init__(self, name, ens_type, form):
         self.name = name
-        self.ens_type = self.__rus_types[ens_type]
         hyparams = form.data
-        self.description = {form[param].label.text: hyparams[param] for param in hyparams}
-        self.description['Тип ансамбля'] = self.__rus_types[ens_type]
+        d = [('Тип ансамбля', self.__rus_types[ens_type])]
+        d += [(form[param].label.text, hyparams[param]) for param in hyparams]
+        self.description = pd.DataFrame(d, columns=['Параметр', 'Значение'])
         trees_parameters = hyparams.pop('trees_parameters')
         self.model = self.__models[ens_type](**{**hyparams, **trees_parameters})
         self.train_loss = None

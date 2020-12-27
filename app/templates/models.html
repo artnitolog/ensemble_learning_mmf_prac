@@ -19,7 +19,7 @@
   
 <h3>Итаг, какие модели у нас есть:</h3>
   {% for name in models: %}
-    <div>* {{ models[name].__dict__ }}</div>
+    <div>* <a href={{ url_for('model_page', name=name) }}>{{ name }}</a> </div>
   {% endfor %}
   <a href="{{ url_for('get_index') }}"><button>верните меня обратно</button></a>
 {% endblock %}

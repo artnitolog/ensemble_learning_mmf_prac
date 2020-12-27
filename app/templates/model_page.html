@@ -1,25 +1,13 @@
 {% extends "base.html" %}
 
-{% block title %}Хмм, страница модели {{ model. }}{% endblock %}
+{% block title %} {{ model.name }} {% endblock %}
 
 {% block content %}
+<h1>Хмм, страница модели {{ model.name }}</h1>
 
+    <p>Что тут у нас известно о модели?! А вот что:</p>
+    <div>{{ model.description.to_html(index=False) | safe }}</div>
 
-<form method='POST' action={{ url_for('get_models') }}>
-        <div class='field'>
-            {{ form.name.label }}
-            {{ form.name(size=20) }}
-        </div>
-        <div class='field'>
-            {{ form.model_type.label }}
-            {{ form.model_type() }}
-        </div>
-        <input type="submit" value="Продолжить">
-</form>
-  
-<h3>Итаг, какие модели у нас есть:</h3>
-  {% for model in models: %}
-    <div>* {{model}}</div>
-  {% endfor %}
-  <a href="{{ url_for('get_index') }}"><button>верните меня обратно</button></a>
+    <div> {{ model.__dict__ }} </div>
+  <a href="{{ url_for('get_models') }}"><button>верните меня обратно</button></a>
 {% endblock %}
