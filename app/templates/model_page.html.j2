@@ -3,16 +3,23 @@
 {% block title %} {{ model.name }} {% endblock %}
 
 {% block content %}
-<h1>Хмм, страница модели {{ model.name }}</h1>
+<h1>{{ model.name }}</h1>
 
-    <p>Что тут у нас известно о модели?! А вот что:</p>
+    <h3>Информация о модели и ее гиперпараметрах:</h3>
+
     <div>{{ model.description.to_html(index=False) | safe }}</div>
-
+    <br>
     <div>
     {% if model.is_fitted %}
+      <h3>
+      ИтЕрАтИвНыЙ график ошибок
+      </h3>
       <img src={{ url_for('plot_png', name=model.name) }} alt='alt: гРаФиК нЕ пОдГрУжАеТсЯ'
                    width=50%>
-      <p>Поздравляем с обучением модели! Теперь можно предсказывать.</p>
+      <p>Модель успешно обучилась! Теперь можно прогнозировать.<br/>
+      <small><i>Можно <a href={{ url_for('get_data') }}>загрузить</a> почти наверное много
+      тестовых выборок.</i></small>
+      </p>
       <form method='POST' action={{ url_for('model_page', name=model.name) }}>
         <div class='field'>
             {{ test_form.test_data.label }}
@@ -21,7 +28,11 @@
         <input type="submit" value="Предсказать">
       </form>
     {% else %}
-        <p>Пока что модель не обучена. Почему бы не сделать это?</p>
+        <p>Пока что модель не обучена.
+        Почему бы не сделать это прямо сейчас?<br/>
+        <small><i>Если список датасетов пуст или маловат, то их
+        необходимо сначала <a href={{ url_for('get_data') }}>загрузить</a>.</i></small></p>
+
         <form method='POST' action={{ url_for('model_page', name=model.name) }}>
         <div class='field'>
             {{ learn_form.train_data.label }}
@@ -37,7 +48,6 @@
     {% endif %}
     </div>
 
-    <div> {{ model.model.__dict__ }} </div>
-  
-  <a href="{{ url_for('get_models') }}"><button>верните меня обратно</button></a>
+<br>
+<a href="{{ url_for('get_models') }}"><button>Назад</button></a>
 {% endblock %}

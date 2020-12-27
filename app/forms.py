@@ -33,7 +33,7 @@ class HyperParamForm(FlaskForm):
     )
     random_state = IntegerField('Сид', default=0)
     trees_parameters = StringField(
-        'Дополнительные параметры для дерева JSON!',
+        'Дополнительные параметры для дерева (JSON)',
         validators=[Optional()],
         filters=[json_field_filter]
     )

@@ -4,10 +4,11 @@
 
 {% block content %}
 
-<h2>{{ name }}</h2>
-<h2>{{ model_type }}</h2>
+<h1>Выбор гиперпараметров для модели <u>{{ name }}</u>,</h1>
+<h3>Тип ансамбля — {{ ('случайный лес' if (model_type == 'RF')
+                      else 'градиентный бустинг')}}.</h3>
 
-Гиперпараметры:
+<i>Укажите гиперпараметры:</i>
 <form method='POST' action={{ url_for('set_model', name=name) }}>
         <div class='field'>
             {{ form.n_estimators.label }}
@@ -38,5 +39,6 @@
         <input type="submit" value="Сохранить модель">
 </form>
 
-  <a href="{{ url_for('get_models') }}"><button>верните меня обратно</button></a>
+<br>
+<a href="{{ url_for('get_models') }}"><button>Назад</button></a>
 {% endblock %}

@@ -4,22 +4,28 @@
 
 {% block content %}
 
+<h1>Модели</h1>
 
+<h3>Добавить новую модель:</h3>
 <form method='POST' action={{ url_for('get_models') }}>
-        <div class='field'>
-            {{ form.name.label }}
-            {{ form.name(size=20) }}
-        </div>
-        <div class='field'>
-            {{ form.model_type.label }}
-            {{ form.model_type() }}
-        </div>
-        <input type="submit" value="Продолжить">
+  <div class='field'>
+    {{ form.name.label }}
+    {{ form.name(size=20) }}
+  </div>
+  <div class='field'>
+    {{ form.model_type.label }}
+    {{ form.model_type() }}
+  </div>
+  <input type="submit" value="Указать гиперпараметры">
 </form>
   
-<h3>Итаг, какие модели у нас есть:</h3>
+<h3>Список моделей:</h3>
+<ul>
   {% for name in models: %}
-    <div>* <a href={{ url_for('model_page', name=name) }}>{{ name }}</a> </div>
+    <li><a href={{ url_for('model_page', name=name) }}>{{ name }}</a></li>
   {% endfor %}
-  <a href="{{ url_for('get_index') }}"><button>верните меня обратно</button></a>
+</ul>
+
+<br>
+<a href="{{ url_for('get_index') }}"><button>Назад</button></a>
 {% endblock %}
