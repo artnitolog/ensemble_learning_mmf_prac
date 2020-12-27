@@ -8,6 +8,7 @@
     <p>Что тут у нас известно о модели?! А вот что:</p>
     <div>{{ model.description.to_html(index=False) | safe }}</div>
 
+    if 
     <div> {{ model.__dict__ }} </div>
   <a href="{{ url_for('get_models') }}"><button>верните меня обратно</button></a>
 {% endblock %}
