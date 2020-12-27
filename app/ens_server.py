@@ -76,7 +76,6 @@ def model_page(name):
         data_train = datasets[learn_form.train_data.data]
         data_val = datasets.get(learn_form.val_data.data)
         models[name].fit(data_train, data_val)
-        # models[name].plot()
         return redirect(url_for('model_page', name=name))
     if test_form.validate_on_submit():
         data_test = datasets[test_form.test_data.data]
@@ -87,5 +86,4 @@ def model_page(name):
             os.mkdir(path)
         preds.to_csv(os.path.join(path, fname))
         return send_from_directory(path, fname, as_attachment=True)
-        # return redirect(url_for('model_page', name=name))
     return render_template('model_page.html.j2', model=models[name], learn_form=learn_form, test_form=test_form)

@@ -1,6 +1,6 @@
 import json
 from flask_wtf import FlaskForm
-from wtforms import StringField, SelectField, DecimalField, IntegerField
+from wtforms import StringField, SelectField, FloatField, IntegerField
 from wtforms.validators import DataRequired, Optional
 from flask_wtf.file import FileField, FileAllowed, FileRequired
 
@@ -23,7 +23,7 @@ class NewEnsembleForm(FlaskForm):
 
 class HyperParamForm(FlaskForm):
     n_estimators = IntegerField('Количество деревьев', default=100)
-    learning_rate = DecimalField('Темп обучения', default=0.1)
+    learning_rate = FloatField('Темп обучения', default=0.1)
     max_depth = IntegerField('Максимальная глубина', validators=[Optional()])
     feature_subsample_size = IntegerField('Размерность подвыборки признаков для одного дерева',
         validators=[Optional()])
