@@ -1,10 +1,12 @@
-# Третье практическое задание
+## Ансамбли решающих деревьев для решения задачи регрессии, веб-сервер
+![demo](screens/demo.png)
 
-#### Предметный указатель!
-* [Реализации ансамблей](https://github.com/artnitolog/mmf_prac_2020_task_3/tree/main/ensembles)
-* [Отчет об экспериментах](https://github.com/artnitolog/mmf_prac_2020_task_3/blob/main/experiments/report.pdf)
-* [Ноутбук с экспериментами](https://github.com/artnitolog/mmf_prac_2020_task_3/blob/main/experiments/experiments.ipynb)
-* [Реализация веб-сервера](https://github.com/artnitolog/mmf_prac_2020_task_3/tree/main/app)
+### Быстрые ссылки
+* [Отчет об экспериментах](experiments/report.pdf)
+* [Реализации ансамблей](ensembles/)
+* [Ноутбук с экспериментами](experiments/experiments.ipynb)
+* [Реализация веб-сервера](app/)
+* [Формулировка задания](task/task3.pdf)
 
 ### Инструкция для [готовой сборки](https://hub.docker.com/r/artnitolog/server_ens) сервера
 * `docker run --rm -p 5000:5000 -i artnitolog/server_ens`
